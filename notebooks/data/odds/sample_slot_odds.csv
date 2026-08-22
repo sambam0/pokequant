@@ -1,0 +1,12 @@
+slot,rarity,weight
+common,common,1.0
+uncommon,uncommon,1.0
+rare_plus,rare,0.55
+rare_plus,double_rare,0.25
+rare_plus,ultra_rare,0.12
+rare_plus,illustration_rare,0.06
+rare_plus,special_illustration_rare,0.02
+reverse,common,0.40
+reverse,uncommon,0.30
+reverse,rare,0.20
+reverse,ultra_rare,0.10

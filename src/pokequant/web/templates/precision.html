@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Precision · PokeQuant{% endblock %}
+{% block content %}
+<h1>Precision gate</h1>
+<div class="cards">
+  <div class="card"><div class="muted">Deal labeled</div><h2>{{ snap.deal_labeled_count if snap else 0 }} / {{ snap.window_size if snap else 40 }}</h2></div>
+  <div class="card"><div class="muted">Really good</div><h2>{{ '%.1f'|format((snap.really_good_rate if snap else 0) * 100) }}%</h2></div>
+  <div class="card"><div class="muted">False match</div><h2>{{ '%.1f'|format((snap.false_match_rate if snap else 0) * 100) }}%</h2></div>
+  <div class="card"><div class="muted">Gate</div><h2 class="{{ 'ok' if snap and snap.gate_passed else 'bad' }}">{{ 'PASS' if snap and snap.gate_passed else 'HOLD' }}</h2></div>
+</div>
+<p class="muted">Need ≥40 labeled alerts and ≥50% really_good, with false-match ≤10%, before expanding the watchlist.</p>
+
+<h2>Recent decisions</h2>
+<table>
+  <tr><th>ID</th><th>Intent</th><th>Label</th><th>Reason</th><th>False match</th></tr>
+  {% for d in recent %}
+  <tr>
+    <td>{{ d.id }}</td>
+    <td>{{ d.intent }}</td>
+    <td>{{ d.quality_label }}</td>
+    <td>{{ d.reason_code or '' }}</td>
+    <td>{{ d.false_match }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

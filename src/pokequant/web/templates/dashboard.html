@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · PokeQuant{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+<div class="cards">
+  <div class="card"><div class="muted">Watchlist cards</div><h2>{{ watch_count }}</h2></div>
+  <div class="card"><div class="muted">Open alerts</div><h2>{{ open_alerts }}</h2></div>
+  <div class="card"><div class="muted">Really-good rate</div><h2>{{ '%.0f'|format((snap.really_good_rate if snap else 0) * 100) }}%</h2></div>
+  <div class="card"><div class="muted">Precision gate</div><h2 class="{{ 'ok' if snap and snap.gate_passed else 'bad' }}">{{ 'PASS' if snap and snap.gate_passed else 'LOCKED' }}</h2></div>
+</div>
+
+<h2>Expansion</h2>
+<p>{{ expansion.reason }}</p>
+<ul>
+  {% for a in expansion.next_actions %}<li>{{ a }}</li>{% endfor %}
+</ul>
+
+<h2>Recent inventory</h2>
+<table>
+  <tr><th>Code</th><th>Item</th><th>State</th><th>Location</th><th>Cost</th></tr>
+  {% for u in inventory %}
+  <tr>
+    <td>{{ u.inventory_code }}</td>
+    <td>{{ u.identity_name }}</td>
+    <td>{{ u.state }}</td>
+    <td>{{ u.location }}</td>
+    <td>{{ format_sek(u.allocated_cost_ore) }}</td>
+  </tr>
+  {% else %}
+  <tr><td colspan="5" class="muted">No inventory yet</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

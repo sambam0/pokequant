@@ -1,0 +1,108 @@
+product_id: magnificent_maestros
+name: Magnificent Maestros
+game: yugioh
+region: europe_pool
+unit: box
+set_code: MAMS
+notes: >
+  Holiday sequel to Magnificent Monsters (EU 12 Nov 2026 / Americas 13 Nov).
+  Not a 24-pack booster: 3×5-card Ultra packs + 3 cellophane bonus cards.
+  125 unique cards (rarities not double-counted). Replaces 2026 Mega Tins role.
+  GMR: 100×18=1800 Europe-pool serials (E suffix), English-only cards in any language pack.
+  Case = 12 boxes (same as Magnificent Monsters). Print run unknown — see research scenarios.
+packs_per_box: 3
+cards_per_pack: 5
+bonus_secrets_per_box: 3
+retail_price_sek: 420
+retail_notes: "Placeholder EU; UK chatter on sister set ~£27–35; US MSRP $34.99"
+chase:
+  type: print_run_serial
+  name: grand_master_rare
+  label: Grand Master Rare (any of 18)
+  cards_eligible: 18
+  serials_per_card: 100
+  total_serials_region: 1800
+  # Grounded scenarios (Europe+Oceania+Africa+MENA pool), not Konami facts:
+  # low=tight allocation holiday tuckbox; mid=central; high=mega-tin-like volume
+  print_run_boxes_scenarios: [80000, 150000, 250000]
+  print_run_rationale: >
+    12 boxes/case; GMR marketing implies roughly 1 serial per ~50–150 boxes.
+    That backsolves N≈1800×(50–150)=90k–270k. Mid 150k used as base case.
+fixed_rate_chases:
+  - name: pack_extended_art_ur
+    label: Extended Art Ultra (pack slot 5) — assumed
+    hits_per_box: 0.55
+  - name: pack_extended_starlight
+    label: Extended Art Starlight (pack slot 5) — assumed
+    hits_per_box: 0.08
+  - name: bonus_starlight
+    label: Bonus-slot Starlight upgrade — assumed
+    hits_per_box: 0.20
+# Slot model from official/Revz/YGOrg breakdown. Rates for UR/EXT/STR are ASSUMED
+# (Konami unpublished). GMR rate is derived from print_run, not listed here.
+slots:
+  pack:
+    - name: reprints_ur
+      cards_per_box: 3
+      pool_size: 20
+      examples: ["Toon Bookmark", "Toon Black Luster Soldier", "Toon Dark Magician", "Red-Eyes Toon Dragon", "Toon Table of Contents", "Stellarnova Alpha"]
+    - name: new_archetype_ur
+      cards_per_box: 3
+      pool_size: 21
+      examples: ["Blue-Eyes Ultimate Toon Dragon", "new Witchcrafter / Unchained / Toon support"]
+    - name: foil_upgrade_ur
+      cards_per_box: 3
+      pool_size: 40
+      examples: ["Toon Barrel Dragon", "Toon Buster Blader", "Madolche Ticket", "Magical Scientist", "Berserk Gorilla"]
+    - name: chibi_or_anime_ur
+      cards_per_box: 3
+      pool_size: 20
+      examples: ["Fallen of Albaz chibi", "Lovely Labrynth chibi", "Dark Tuner Nightmare Hand", "Chaos End Ruler"]
+    - name: chase_slot
+      cards_per_box: 3
+      pool_size: 18
+      outcomes:
+        # Conditional on not being GMR. Weights renormalized after GMR draw.
+        standard_ur: 0.72
+        extended_ur: 0.24
+        extended_starlight: 0.04
+  bonus:
+    - name: bonus_secret_1
+      cards_per_box: 1
+      pool_size: 14
+      theme: "Unchained / chibi / anime"
+    - name: bonus_secret_2
+      cards_per_box: 1
+      pool_size: 14
+      theme: "Witchcrafter / chibi / anime"
+    - name: bonus_secret_3
+      cards_per_box: 1
+      pool_size: 19
+      theme: "Toon / anime / 6 reprint extended arts"
+      can_be_extended_art: true
+# Speculative secondary-market SEK bands (raw NM Cardmarket-style), pre-release.
+# Anchors: Blue-Eyes QCSR ~$150–230; OCG Revolution over-frames ¥2.5k–19k;
+# true 100-copy serials typically far above normal Starlights.
+price_bands_sek:
+  reprints_ur: {bear: 5, base: 12, bull: 25}
+  new_archetype_ur: {bear: 25, base: 55, bull: 120}
+  foil_upgrade_ur: {bear: 8, base: 18, bull: 40}
+  chibi_or_anime_ur: {bear: 20, base: 50, bull: 110}
+  chase_standard_ur: {bear: 40, base: 90, bull: 180}
+  chase_extended_ur: {bear: 200, base: 450, bull: 900}
+  chase_extended_starlight: {bear: 900, base: 2200, bull: 5000}
+  bonus_secret: {bear: 40, base: 85, bull: 180}
+  bonus_starlight: {bear: 500, base: 1200, bull: 2800}
+  bonus_extended_ur: {bear: 250, base: 550, bull: 1100}
+  # Average across all 18 GMR arts (Blue-Eyes end much higher; weaker arts lower)
+  gmr_average: {bear: 12000, base: 28000, bull: 55000}
+  gmr_blue_eyes_top: {bear: 40000, base: 90000, bull: 180000}
+ev:
+  # Filled by notebook from price_bands; kept for 03_compare compatibility
+  slots:
+    - name: ultra_pack_slot
+      count: 15
+      expected_value_sek: 55
+    - name: bonus_secret_slot
+      count: 3
+      expected_value_sek: 95

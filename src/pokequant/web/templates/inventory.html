@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Inventory · PokeQuant{% endblock %}
+{% block content %}
+<h1>Inventory</h1>
+<table>
+  <tr><th>Code</th><th>Identity</th><th>Condition</th><th>State</th><th>Location</th><th>Cost</th><th>VAT</th></tr>
+  {% for u in units %}
+  <tr>
+    <td>{{ u.inventory_code }}</td>
+    <td>{{ u.identity_name }}</td>
+    <td>{{ u.condition }}</td>
+    <td>{{ u.state }}</td>
+    <td>{{ u.location }}</td>
+    <td>{{ format_sek(u.allocated_cost_ore) }}</td>
+    <td>{{ u.vat_code }}</td>
+  </tr>
+  {% else %}
+  <tr><td colspan="7" class="muted">No units yet</td></tr>
+  {% endfor %}
+</table>
+
+<h2>Sales</h2>
+<table>
+  <tr><th>Code</th><th>Channel</th><th>Gross</th><th>Fees</th><th>Net</th><th>Settlement</th></tr>
+  {% for s in sales %}
+  <tr>
+    <td>{{ s.sale_code }}</td>
+    <td>{{ s.channel }}</td>
+    <td>{{ format_sek(s.gross_ore) }}</td>
+    <td>{{ format_sek(s.marketplace_fee_ore + s.payment_fee_ore + s.postage_ore + s.packaging_ore) }}</td>
+    <td>{{ format_sek(net_proceeds_ore(s)) }}</td>
+    <td>{{ s.settlement_state }}</td>
+  </tr>
+  {% else %}
+  <tr><td colspan="6" class="muted">No sales yet</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

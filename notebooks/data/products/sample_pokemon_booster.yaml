@@ -1,0 +1,39 @@
+product_id: sample_pokemon_booster
+name: Sample Pokémon Booster Box
+game: pokemon
+region: europe
+unit: box
+notes: >
+  Fictional sample for sims. 36 packs/box. Edit retail and hits_per_box to match a real set.
+  Fixed-rate chase models SIR-style hits (community estimate — not official).
+packs_per_box: 36
+cards_per_pack: 10
+retail_price_sek: 1800
+retail_price_per_pack_sek: 50
+chase:
+  type: fixed_rate
+  name: special_illustration_rare
+  label: Special Illustration Rare (placeholder)
+  hits_per_box: 0.5
+fixed_rate_chases:
+  - name: special_illustration_rare
+    label: SIR (placeholder ~0.5 per box)
+    hits_per_box: 0.5
+  - name: illustration_rare
+    label: Illustration Rare (placeholder ~2 per box)
+    hits_per_box: 2.0
+ev:
+  # Pack-level EV from rarity slots (see also data/cards + data/odds for detailed model)
+  slots:
+    - name: common
+      count: 4
+      expected_value_sek: 1
+    - name: uncommon
+      count: 3
+      expected_value_sek: 2
+    - name: rare_plus
+      count: 2
+      expected_value_sek: 8
+    - name: reverse
+      count: 1
+      expected_value_sek: 5

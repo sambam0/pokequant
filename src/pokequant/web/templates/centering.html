@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}Centering · PokeQuant{% endblock %}
+{% block content %}
+<h1>Centering overlay</h1>
+<p class="muted">Drop a listing photo. Click the four <strong>card corners</strong> (clockwise from top-left), then the four <strong>inner artwork corners</strong>. This is a decision aid — seller photos lie.</p>
+<p>
+  <label>Era
+    <select id="era">
+      <option value="modern">Modern (55/45)</option>
+      <option value="vintage">Vintage (60/40)</option>
+    </select>
+  </label>
+  <span id="step" class="muted">Waiting for a photo…</span>
+</p>
+<input id="file" type="file" accept="image/*" />
+<canvas id="canvas" style="max-width:100%; background:#111; display:block; margin:1rem 0; cursor:crosshair;"></canvas>
+<p id="verdict"></p>
+<button type="button" id="reset">Reset points</button>
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+const stepEl = document.getElementById("step");
+const verdictEl = document.getElementById("verdict");
+let img = null;
+let outer = [];
+let inner = [];
+
+function redraw(measure) {
+  if (!img) return;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(img, 0, 0);
+  const drawPoly = (pts, color) => {
+    if (pts.length < 1) return;
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    pts.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y));
+    if (pts.length === 4) ctx.closePath();
+    ctx.stroke();
+    pts.forEach((p) => { ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI * 2); ctx.fill(); });
+  };
+  drawPoly(outer, "#22d3ee");
+  drawPoly(inner, "#f59e0b");
+  if (measure && outer.length === 4) {
+    const xs = outer.map(p => p.x), ys = outer.map(p => p.y);
+    const minX = Math.min(...xs), maxX = Math.max(...xs);
+    const minY = Math.min(...ys), maxY = Math.max(...ys);
+    const midX = (minX + maxX) / 2, midY = (minY + maxY) / 2;
+    ctx.strokeStyle = "rgba(255,255,255,0.45)";
+    ctx.setLineDash([6, 4]);
+    ctx.beginPath(); ctx.moveTo(midX, minY); ctx.lineTo(midX, maxY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(minX, midY); ctx.lineTo(maxX, midY); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+}
+
+function setStep() {
+  if (!img) { stepEl.textContent = "Waiting for a photo…"; return; }
+  if (outer.length < 4) { stepEl.textContent = `Card corners ${outer.length}/4`; return; }
+  if (inner.length < 4) { stepEl.textContent = `Inner artwork corners ${inner.length}/4`; return; }
+  stepEl.textContent = "Measured. Click reset to start over.";
+}
+
+async function maybeMeasure() {
+  if (outer.length !== 4 || inner.length !== 4) return;
+  const res = await fetch("/centering/measure", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({outer, inner, era: document.getElementById("era").value}),
+  });
+  const data = await res.json();
+  verdictEl.textContent = `${data.verdict} · confidence ${data.confidence} (${data.reason})`;
+  verdictEl.className = data.inside_psa10 ? "ok" : "bad";
+  redraw(data);
+}
+
+document.getElementById("file").addEventListener("change", (ev) => {
+  const file = ev.target.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  const image = new Image();
+  image.onload = () => {
+    img = image;
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+    outer = []; inner = [];
+    verdictEl.textContent = "";
+    redraw();
+    setStep();
+  };
+  image.src = url;
+});
+
+canvas.addEventListener("click", (ev) => {
+  if (!img) return;
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  const pt = {x: (ev.clientX - rect.left) * scaleX, y: (ev.clientY - rect.top) * scaleY};
+  if (outer.length < 4) outer.push(pt);
+  else if (inner.length < 4) inner.push(pt);
+  setStep();
+  redraw();
+  maybeMeasure();
+});
+
+document.getElementById("reset").addEventListener("click", () => {
+  outer = []; inner = [];
+  verdictEl.textContent = "";
+  redraw();
+  setStep();
+});
+document.getElementById("era").addEventListener("change", () => maybeMeasure());
+</script>
+{% endblock %}

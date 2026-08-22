@@ -1,0 +1,4 @@
+# Copy to SUPERVISED_OK only after every Hard gate in the Hermes Mini plan is green.
+# Empty file is invalid. Contents are hashed by mini-doctor.
+charter_date=YYYY-MM-DD
+operators=Technology Owner,Domain Owner

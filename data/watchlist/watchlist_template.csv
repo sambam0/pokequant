@@ -1,0 +1,4 @@
+watch_id,name,set_code,set_name,collector_number,language,variant,tcgdex_id,search_aliases,condition_floor,priority,min_discount_bps,max_buy_ore,reference_source,notes
+WATCH-001,Charizard,base1,Base Set,4,en,holo,base1-4,"charizard 4/102;charizard holo base;charizard base set",LP,core,2500,,cardmarket,Example row — replace with real watchlist
+WATCH-002,Blastoise,base1,Base Set,2,en,holo,base1-2,"blastoise 2/102;blastoise holo base",LP,core,2500,,cardmarket,Example row
+WATCH-003,Venusaur,base1,Base Set,15,en,holo,base1-15,"venusaur 15/102;venusaur holo base",LP,core,2500,,cardmarket,Example row

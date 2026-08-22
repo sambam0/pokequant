@@ -1,0 +1,2 @@
+opportunity_id,source,status,observed_at,match_score,item_price_ore,shipping_ore,buyer_fee_ore,currency,sek_ore,primary_or_secondary,included,exclude_reason
+OP-20260810-001,cardmarket,guide,2026-08-10T00:00:00Z,1.0,180000,0,0,EUR,1980000,primary,true,

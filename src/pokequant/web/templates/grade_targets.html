@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Grade targets · PokeQuant{% endblock %}
+{% block content %}
+<h1>Grade-spread targets</h1>
+<p class="muted">Ranked by expected grading value, not PSA 10 / Black Label headline spread. Export with <code>pokequant grade-targets export --apply</code>.</p>
+<p>
+  <a href="/grade-targets">All</a>
+  · <a href="/grade-targets?tier=workhorse">Workhorse</a>
+  · <a href="/grade-targets?tier=hunt">Hunt</a>
+  · <a href="/grade-targets?tier=moonshot">Moonshot</a>
+</p>
+<table>
+  <tr>
+    <th>Tier</th><th>Sport</th><th>Card</th><th>EV</th><th>If 10</th><th>Spread</th>
+    <th>Gem prior</th><th>Max raw buy</th><th>PC id</th>
+  </tr>
+  {% for r in rows %}
+  <tr>
+    <td>{{ r.tier }}</td>
+    <td>{{ r.sport }}</td>
+    <td>{{ r.product_name }}<div class="muted">{{ r.console_name }} {{ r.collector_number }}</div></td>
+    <td>{{ format_sek(r.ev_ore) }}</td>
+    <td>{{ '%.2f'|format(r.upside_if_10_mult) }}x</td>
+    <td>{{ '%.2f'|format(r.spread_psa10) }}x</td>
+    <td>{{ '%.0f'|format(r.gem_rate_psa10 * 100) }}% {{ r.prior_bucket }}</td>
+    <td>{{ format_sek(r.max_raw_buy_ore) }}</td>
+    <td>{{ r.pricecharting_id }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

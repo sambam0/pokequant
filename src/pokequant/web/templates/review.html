@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Review · PokeQuant{% endblock %}
+{% block content %}
+<h1>Review queue</h1>
+<p class="muted">Bought is the only path to purchased. Good (would buy) is a deal label, not an acquisition.</p>
+<table>
+  <tr><th>Listing</th><th>Price</th><th>Match</th><th>Decide</th></tr>
+  {% for l in listings %}
+  <tr>
+    <td>
+      <a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.title }}</a>
+      <div class="muted">{{ l.source_code }}:{{ l.external_id }}</div>
+    </td>
+    <td>{{ format_sek(l.price_ore) }}</td>
+    <td>{{ '%.0f'|format((l.match_confidence or 0) * 100) }}%</td>
+    <td>
+      <form class="inline" method="post" action="/review/{{ l.id }}">
+        <input type="hidden" name="intent" value="skip" />
+        <input type="hidden" name="identity_label" value="wrong" />
+        <input type="hidden" name="deal_label" value="n/a" />
+        <input type="hidden" name="reason_code" value="wrong_identity" />
+        <button type="submit">Wrong card</button>
+      </form>
+      <form class="inline" method="post" action="/review/{{ l.id }}">
+        <input type="hidden" name="intent" value="skip" />
+        <input type="hidden" name="identity_label" value="correct" />
+        <input type="hidden" name="deal_label" value="junk" />
+        <button type="submit">Junk</button>
+      </form>
+      <form class="inline" method="post" action="/review/{{ l.id }}">
+        <input type="hidden" name="intent" value="skip" />
+        <input type="hidden" name="identity_label" value="correct" />
+        <input type="hidden" name="deal_label" value="maybe" />
+        <button type="submit">Maybe</button>
+      </form>
+      <form class="inline" method="post" action="/review/{{ l.id }}">
+        <input type="hidden" name="intent" value="skip" />
+        <input type="hidden" name="identity_label" value="correct" />
+        <input type="hidden" name="deal_label" value="really_good" />
+        <button type="submit">Good (would buy)</button>
+      </form>
+      <form class="inline" method="post" action="/review/{{ l.id }}">
+        <input type="hidden" name="intent" value="buy" />
+        <input type="hidden" name="identity_label" value="correct" />
+        <input type="hidden" name="deal_label" value="really_good" />
+        <button type="submit">Bought</button>
+      </form>
+      <form class="inline" method="post" action="/review/{{ l.id }}">
+        <input type="hidden" name="intent" value="too_late" />
+        <input type="hidden" name="identity_label" value="correct" />
+        <input type="hidden" name="deal_label" value="maybe" />
+        <button type="submit">Too late</button>
+      </form>
+    </td>
+  </tr>
+  {% else %}
+  <tr><td colspan="4" class="muted">No alerted listings. Run <code>pokequant scan --send-telegram</code>.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

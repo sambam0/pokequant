@@ -1,0 +1,9 @@
+id,console-name,product-name,genre,release-date,loose-price,new-price,graded-price,manual-only-price,bgs-10-price,condition-20-price
+101,Pokemon Card,Pikachu #25,Pokemon Card,2023-01-15,100.00,130.00,160.00,350.00,400.00,800.00
+102,Pokemon Card,Charizard ex Holo #6,Pokemon Card,2023-06-01,60.00,80.00,110.00,280.00,320.00,900.00
+103,Pokemon Card,Mew Special Illustration Rare,Pokemon Card,2023-11-01,80.00,100.00,140.00,400.00,450.00,1200.00
+104,Pokemon Card,Charizard Holo Base Set #4,Pokemon Card,1999-01-09,400.00,600.00,800.00,3500.00,4000.00,20000.00
+201,Hockey Card,Wayne Gretzky 1990 Upper Deck,Hockey Card,1990-09-01,20.00,28.00,40.00,200.00,250.00,2000.00
+202,Hockey Card,Mario Lemieux 1991,Hockey Card,1991-01-01,80.00,85.00,90.00,220.00,240.00,180.00
+301,Pokemon Card,Bulk Energy no grades,Pokemon Card,2024-01-01,4.00,,,,,
+401,NES,Super Mario Bros,Platform,1985-09-13,25.00,40.00,80.00,200.00,,

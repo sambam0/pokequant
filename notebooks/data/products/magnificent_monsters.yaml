@@ -1,0 +1,35 @@
+product_id: magnificent_monsters
+name: Magnificent Monsters
+game: yugioh
+region: europe_pool
+unit: box
+notes: >
+  Premium tuckbox (not a 24-pack booster). 3×5 Ultra packs + 3 bonus Secrets.
+  Grand Master Rare: 100 serials × 18 cards = 1800 for Europe/Oceania/Africa/MENA (E suffix).
+  Release ~Sep 2026. No official per-box GMR rate — odds need a print-run assumption.
+packs_per_box: 3
+cards_per_pack: 5
+bonus_secrets_per_box: 3
+retail_price_sek: 400
+chase:
+  type: print_run_serial
+  name: grand_master_rare
+  label: Grand Master Rare (any of 18)
+  cards_eligible: 18
+  serials_per_card: 100
+  total_serials_region: 1800
+  print_run_boxes_scenarios: [50000, 100000, 200000, 500000]
+# Optional secondary chase with a fixed community-style rate (edit when data exists)
+fixed_rate_chases:
+  - name: starlight_rare
+    label: Starlight Rare (bonus upgrade — placeholder rate)
+    hits_per_box: 0.15
+ev:
+  # Placeholder slot values for EV notebook (SEK). Replace with real comps.
+  slots:
+    - name: ultra_pack_slot
+      count: 15
+      expected_value_sek: 8
+    - name: bonus_secret_slot
+      count: 3
+      expected_value_sek: 40

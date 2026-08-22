@@ -1,0 +1,2 @@
+opportunity_id,discovered_at,source,source_url,watch_id,asking_ore,shipping_ore,buyer_fee_ore,currency,seller_type,identity_confidence,condition_range,reference_ore,max_buy_ore,label,decision,reason_code,reviewer,reviewed_at,notes
+OP-20260810-001,2026-08-10T12:00:00Z,tradera,https://www.tradera.com/item/example,WATCH-001,150000,4900,0,SEK,private,0.85,NM-LP,220000,160000,really_good,buy,,brother,2026-08-10T12:30:00Z,Example — replace with real reviews

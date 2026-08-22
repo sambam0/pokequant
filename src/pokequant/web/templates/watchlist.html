@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Watchlist · PokeQuant{% endblock %}
+{% block content %}
+<h1>Frozen watchlist</h1>
+<p class="muted">{{ items|length }} active cards. Expand only after the precision gate passes.</p>
+<table>
+  <tr><th>ID</th><th>Priority</th><th>Thesis</th><th>Tier</th><th>Name</th><th>Set</th><th>#</th><th>Lang</th><th>Variant</th><th>Min discount</th><th>Max buy</th></tr>
+  {% for i in items %}
+  <tr>
+    <td>{{ i.watch_id }}</td>
+    <td>{{ i.priority }}</td>
+    <td>{{ i.buy_thesis }}</td>
+    <td>{{ i.grade_tier or "—" }}</td>
+    <td>{{ i.name }}</td>
+    <td>{{ i.set_code }}</td>
+    <td>{{ i.collector_number }}</td>
+    <td>{{ i.language }}</td>
+    <td>{{ i.variant }}</td>
+    <td>{{ '%.0f'|format(i.min_discount_bps / 100) }}%</td>
+    <td>{% if i.max_buy_ore %}{{ i.max_buy_ore / 100 }}{% else %}—{% endif %}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

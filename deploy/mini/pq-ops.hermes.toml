@@ -1,0 +1,24 @@
+# Fragment for ~/.hermes/profiles/pq-ops — never name the profile pokequant.
+# Apply via `hermes profile create pq-ops` then merge these keys. Pin cron.model
+# to the model you actually run. Write-approval defaults are false; turn them on.
+
+[memory]
+write_approval = true
+
+[skills]
+write_approval = true
+
+[terminal]
+cwd = "/Users/REPLACE/Poke"
+
+[cron]
+# model = "…"
+# no_agent jobs must be basenames under $HERMES_HOME/scripts only:
+#   tradera-scan.sh  (only after SUPERVISED_OK + mini-doctor green)
+#   sync-comps.sh
+#   replay-skips.sh
+#   match-audit.sh
+#   morning-digest.sh
+#   snapshot-compact.sh
+# Never `hermes cron pause`. Never a second gateway on this HERMES_HOME.
+# Watchdog is a macOS LaunchAgent, not a Hermes cron.

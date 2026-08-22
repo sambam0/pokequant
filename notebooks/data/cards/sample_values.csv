@@ -1,0 +1,34 @@
+card_id,name,rarity,market_value_sek,set_id
+PKM-001,Sample Common A,common,1,sample_set
+PKM-002,Sample Common B,common,1,sample_set
+PKM-003,Sample Common C,common,2,sample_set
+PKM-004,Sample Common D,common,1,sample_set
+PKM-005,Sample Common E,common,1,sample_set
+PKM-006,Sample Common F,common,1,sample_set
+PKM-007,Sample Common G,common,2,sample_set
+PKM-008,Sample Common H,common,1,sample_set
+PKM-009,Sample Common I,common,1,sample_set
+PKM-010,Sample Common J,common,1,sample_set
+PKM-011,Sample Uncommon A,uncommon,3,sample_set
+PKM-012,Sample Uncommon B,uncommon,2,sample_set
+PKM-013,Sample Uncommon C,uncommon,4,sample_set
+PKM-014,Sample Uncommon D,uncommon,2,sample_set
+PKM-015,Sample Uncommon E,uncommon,3,sample_set
+PKM-016,Sample Uncommon F,uncommon,2,sample_set
+PKM-017,Sample Rare A,rare,8,sample_set
+PKM-018,Sample Rare B,rare,6,sample_set
+PKM-019,Sample Rare C,rare,10,sample_set
+PKM-020,Sample Rare D,rare,7,sample_set
+PKM-021,Sample Double Rare A,double_rare,25,sample_set
+PKM-022,Sample Double Rare B,double_rare,40,sample_set
+PKM-023,Sample Illustration Rare A,illustration_rare,80,sample_set
+PKM-024,Sample Illustration Rare B,illustration_rare,120,sample_set
+PKM-025,Sample SIR A,special_illustration_rare,450,sample_set
+PKM-026,Sample SIR B,special_illustration_rare,800,sample_set
+PKM-027,Sample Ultra Rare A,ultra_rare,35,sample_set
+PKM-028,Sample Ultra Rare B,ultra_rare,55,sample_set
+YGO-GMR-01,Sample GMR Art 01,grand_master_rare,15000,magnificent_monsters
+YGO-GMR-02,Sample GMR Art 02,grand_master_rare,12000,magnificent_monsters
+YGO-UR-01,Sample Ultra Reprint,ultra_rare,15,magnificent_monsters
+YGO-SCR-01,Sample Secret Rare,secret_rare,80,magnificent_monsters
+YGO-STR-01,Sample Starlight,starlight_rare,600,magnificent_monsters
